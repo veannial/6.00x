@@ -1,4 +1,0 @@
-6.00x
-=====
-
-edX 6.00x Intro to CS
