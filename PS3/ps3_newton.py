@@ -15,11 +15,16 @@ def evaluatePoly(poly, x):
     returns: float
     '''
     # FILL IN YOUR CODE HERE...
-
-
-
-
-
+    if len(poly)== 0:
+        return float(0)
+    result = float(poly[0])
+    counter = 1
+    while counter<len(poly):
+        result += poly[counter]*x**counter
+        counter += 1
+    return float(result)
+    
+evaluatePoly([0.0, 0.0, 5.0, 9.3, 7.0], -13)
 
 
 
@@ -33,8 +38,26 @@ def computeDeriv(poly):
     returns: list of numbers (floats)
     '''
     # FILL IN YOUR CODE HERE...
+    counter = 0.0
+    result = []
+    if len(poly) == 1:
+        return [0.0]
+    for i in range(len(poly)):
+        counter = float(poly[i]*i)
+        if i>=1:
+            result.append(counter)
+    return result
 
 
+##    f = 0.0
+##    ans=[]
+##    if len(poly) == 1:
+##        return [0.0]
+##    for i in range(len(poly)):  
+##        f = float(poly[i] * i)
+##        if i >= 1:
+##            ans.append(f)
+##    return ans
 
 
 
@@ -53,3 +76,12 @@ def computeRoot(poly, x_0, epsilon):
     returns: list [float, int]
     '''
     # FILL IN YOUR CODE HERE...
+    ans =[]
+    i = 0
+    while abs(evaluatePoly(poly,x_0))>= epsilon:
+        x_0 = x_0 - (evaluatePoly(poly, x_0) / evaluatePoly(computeDeriv(poly), x_0))
+        i += 1
+    if abs(evaluatePoly(poly,x_0))<= epsilon:
+        ans.append(x_0)
+        ans.append(i)
+    return ans
